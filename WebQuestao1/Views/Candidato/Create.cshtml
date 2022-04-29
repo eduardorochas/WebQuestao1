@@ -1,0 +1,174 @@
+﻿@model WebQuestao1.Models.Candidato
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Candidato</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPF" class="control-label"></label>
+                <input asp-for="CPF" asp- class="form-control" />
+                <span asp-validation-for="CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Habilitacao" /> @Html.DisplayNameFor(model => model.Habilitacao)
+                </label>
+            </div>
+            <div class="form-group" id="formCategoria" name="formCategoria">
+                <label asp-for="Categoria" class="control-label"></label>
+                <input asp-for="Categoria" class="form-control" />
+                <span asp-validation-for="Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idiomas" class="control-label"></label>
+                <select asp-for="Idiomas" class="form-control" asp-items="ViewBag.Idiomas" multiple size="3"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <input asp-for="Estado" class="form-control" />
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cidade" class="control-label"></label>
+                <input asp-for="Cidade" class="form-control" />
+                <span asp-validation-for="Cidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CEP" class="control-label"></label>
+                <input asp-for="CEP" class="form-control" />
+                <span asp-validation-for="CEP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Logradouro" class="control-label"></label>
+                <input asp-for="Logradouro" class="form-control" />
+                <span asp-validation-for="Logradouro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Complemento" class="control-label"></label>
+                <input asp-for="Complemento" class="form-control" />
+                <span asp-validation-for="Complemento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CargoID" class="control-label"></label>
+                <select asp-for="CargoID" class="form-control" asp-items="ViewBag.CargoID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalarioProposto" class="control-label"></label>
+                <input asp-for="SalarioProposto" class="form-control" />
+                <span asp-validation-for="SalarioProposto" class="text-danger"></span>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Dia da Semana </th>
+                        <th scope="col">Hora Início</th>
+                        <th scope="col">Hora Fim</th>
+                        <th scope="col">Tempo de Descanso (h)</th>
+                        <th scope="col">Carga Horária (h)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Horarios)
+                    {
+                    <tr>
+                        <th scope="row">@Html.DisplayTextFor(i => Model.DiasDaSemana[item.DiaSemana])</th>
+                        <td>@Html.TextBoxFor(i => item.HoraInicio, new { @class = "form-control" })</td>
+                        <td>@Html.TextBoxFor(i => item.HoraFim, new { @class = "form-control" })</td>
+                        <td>@Html.TextBoxFor(i => item.TempoDescanso, new { @class = "form-control" })</td>
+                        <td>@Html.TextBoxFor(i => item.CargaHoraria, new { @class = "form-control" })</td>
+                    </tr>
+                    }
+                 </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    
+    <script>
+        $(document).ready(function ($) {
+
+            $('#CPF').mask("999.999.999-99");
+            $('#CPF').blur(function () {
+                var id = $(this).attr("id");
+                var val = $(this).val();
+                var pattern = new RegExp(/[0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2}/);
+
+                if (val.match(pattern) == null) {
+                    $("#" + id + "_error").html("Digite um CPF válido");
+                }
+            });
+
+            $('#Telefone').mask("(99) 99999 - 9999");
+            $('#Telefone').blur(function () {
+                var id = $(this).attr("id");
+                var val = $(this).val();
+                var pattern = new RegExp(/^\([1 - 9]{ 2}\)(?: [2 - 8] | 9[1 - 9])[0 - 9]{ 3}\-[0 - 9]{ 4 } $/);
+
+                if (val.match(pattern) == null) {
+                    $("#" + id + "_error").html("Digite um Telefone válido");
+                }
+            });
+
+            
+            
+            $("#formCategoria").hide();
+
+            $('#Habilitacao').change(function () {
+                if ($('#Habilitacao').is(":checked"))
+                    $("#formCategoria").show()
+                else
+                    $("#formCategoria").hide()
+            });
+            
+            $('#HoraInicio').mask("99:99");
+            $('#HoraFim').mask("99:99");
+            $('#TempoDescanso').mask("9999");
+            $('#CargaHoraria').mask("9999");
+
+        });
+
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
