@@ -54,7 +54,7 @@ namespace WebQuestao1.Models
         [ForeignKey("CargoID")]
         public virtual Cargo Cargo { get; set; }
         [Display(Name = "Salário Proposto")]
-        [RegularExpression(@"^\d+\,\d{0,2}$")]
+        [RegularExpression(@"^\d+\.\d{0,2}$")]
         [Range(0, 9999999999999999.99)]
         public decimal? SalarioProposto { get; set; }
 

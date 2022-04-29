@@ -37,17 +37,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cidade)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CEP)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Logradouro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Numero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Complemento)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cargo)
@@ -86,27 +75,15 @@
                 @Html.DisplayFor(modelItem => item.Cidade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CEP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Logradouro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Complemento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cargo.CargoID)
+                @Html.DisplayFor(modelItem => item.Cargo.Nome)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SalarioProposto)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CandidatoID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CandidatoID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CandidatoID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CandidatoID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.CandidatoID">Detalhe</a> |
+                <a asp-action="Delete" asp-route-id="@item.CandidatoID">Excluir</a>
             </td>
         </tr>
 }

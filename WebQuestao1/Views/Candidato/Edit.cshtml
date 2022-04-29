@@ -39,10 +39,14 @@
                     <input class="form-check-input" asp-for="Habilitacao" /> @Html.DisplayNameFor(model => model.Habilitacao)
                 </label>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="formCategoria" name="formCategoria">
                 <label asp-for="Categoria" class="control-label"></label>
                 <input asp-for="Categoria" class="form-control" />
                 <span asp-validation-for="Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idiomas" class="control-label"></label>
+                <select asp-for="Idiomas" class="form-control" asp-items="ViewBag.Idiomas" multiple size="3"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Estado" class="control-label"></label>
@@ -84,6 +88,29 @@
                 <input asp-for="SalarioProposto" class="form-control" />
                 <span asp-validation-for="SalarioProposto" class="text-danger"></span>
             </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Dia da Semana </th>
+                        <th scope="col">Hora Início</th>
+                        <th scope="col">Hora Fim</th>
+                        <th scope="col">Tempo de Descanso (h)</th>
+                        <th scope="col">Carga Horária (h)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Horarios)
+                    {
+                        <tr>
+                            <th scope="row">@Html.DisplayTextFor(i => Model.DiasDaSemana[item.DiaSemana])</th>
+                            <td>@Html.TextBoxFor(i => item.HoraInicio, new { @class = "form-control" })</td>
+                            <td>@Html.TextBoxFor(i => item.HoraFim, new { @class = "form-control" })</td>
+                            <td>@Html.TextBoxFor(i => item.TempoDescanso, new { @class = "form-control" })</td>
+                            <td>@Html.TextBoxFor(i => item.CargaHoraria, new { @class = "form-control" })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
